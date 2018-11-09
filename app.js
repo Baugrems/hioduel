@@ -6,6 +6,7 @@ var methodOverride = require("method-override");
 
 // Set main routes
 var indexRoutes = require("./routes/index");
+var spellRoutes = require("./routes/spellroutes");
 
 var app = express();
 
@@ -17,6 +18,7 @@ app.use(methodOverride("_method"));
 
 // Gets routes
 app.use(indexRoutes);
+app.use("/spells", spellRoutes);
 
 // This starts the server
 app.listen(process.env.PORT, process.env.IP, function(){
