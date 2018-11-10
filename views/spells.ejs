@@ -1,6 +1,15 @@
 <% include partials/header %>
 
-<h1>Spells Coming Soon</h1>
+<h1>Spell List</h1>
+<a href="spells/new"><button class="ui inverted violet button">
+        <i class="icon magic"></i>
+        Add Spell
+      </button></a>
 
-
+<ul>
+<% results.forEach(function(spell){
+%>
+            <li><a href="/spells/<%= spell.id %>"><i class="magic icon"></i> <%= spell.name %></a></li>
+<% }) %>
+</ul>
 <%include partials/footer %>
