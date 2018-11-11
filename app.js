@@ -26,14 +26,22 @@ var con = mysql.createConnection({
     //insecureAuth : true
   });
 
+// Spells Table for reference
+//var sql = "CREATE TABLE Spells (name VARCHAR(255), damage int(11), DC int(11), specialEffect int(11), spellID int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (spellID));"
 
-con.query('SELECT * FROM Spells ORDER BY name ASC', function (error, results, fields) {
-    if (error)
-        throw error;
-    results.forEach(result => {
-        console.log(result);
+// Runs SQL passed to it
+function runSQL(sql){
+    con.query(sql, function (error, results, fields) {
+        if (error){
+            throw error;
+        }
+        if (results){
+            results.forEach(result => {
+                console.log(result);
+            });
+        }
     });
-});
+}
 
 // Gets routes
 app.use(indexRoutes);
@@ -42,4 +50,6 @@ app.use("/spells", spellRoutes);
 // This starts the server
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Server has started");
+    sql = "SELECT * FROM Spells"
+    runSQL(sql);
 });
