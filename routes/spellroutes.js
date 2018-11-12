@@ -13,6 +13,7 @@ var con = mysql.createConnection({
     //insecureAuth : true
   });
 
+// Spell list and spell homepage
 router.get("/", function(req, res){
     con.query('SELECT * FROM Spells ORDER BY name ASC', function (error, results, fields) {
         if (error)
@@ -21,6 +22,7 @@ router.get("/", function(req, res){
     });
 });
 
+// Adds a new spell to DB and redirects to spell list
 router.post("/", function(req, res){
     if(req.body.specialEffect != null){
         con.query(('INSERT INTO Spells (name, damage, DC, specialEffect) VALUES ("' + req.body.name + '", "' + req.body.damage + '", "' + req.body.DC + '", "' + req.body.specialEffect + '")'), function (error, results, fields) {
@@ -38,10 +40,12 @@ router.post("/", function(req, res){
     }
 });
 
+//Sends to page for adding new spells
 router.get("/new", function(req, res){
     res.render("spellsnew");
 });
 
+//updates the spell data and sends back to spell list
 router.post("/spelledit", function(req, res){
     con.query(('UPDATE Spells SET name="' + req.body.name + '", damage=' + req.body.damage + ', DC=' + req.body.DC + ', specialEffect=' + req.body.specialEffect + ' WHERE spellID=' + req.body.spellID + ';'), function (error, results, fields){
         if (error){
@@ -51,6 +55,17 @@ router.post("/spelledit", function(req, res){
     });
 });
 
+router.post("/spelldelete", function(req, res){
+    con.query(('DELETE FROM Spells WHERE spellID="' + req.body.spellID + '";'), function (error, results, fields){
+        if (error){
+            throw error;
+        }
+        console.log(req.body.spellID)
+        res.redirect("/spells");
+    });
+});
+
+// opens spell details for individual spell by ID in URL
 router.get("/:spellID", function(req, res){
     con.query('SELECT * FROM Spells WHERE spellID="' + req.params.spellID + '"', function (error, results, fields){
         if (error){

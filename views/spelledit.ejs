@@ -22,4 +22,9 @@
     <br><input type="submit" value="Submit">
 </form>
 
+<form action="/spells/spelldelete" method="POST"><button name="spellID" value="<%= results[0].spellID %>" class="ui inverted red button">
+        <i class="icon x"></i>
+        Delete Spell
+      </button></form>
+
 <% include partials/footer %>

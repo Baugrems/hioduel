@@ -10,12 +10,14 @@ var app = express();
 var indexRoutes = require("./routes/index");
 var spellRoutes = require("./routes/spellroutes");
 
+// Set up modules to be used
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 app.use(flash());
 app.use(methodOverride("_method"));
 
+//DB connect - envionmental variables used for security.
 var con = mysql.createConnection({
     host: process.env.HOST,
     database: process.env.DATABASE,
