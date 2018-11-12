@@ -50,6 +50,6 @@ app.use("/spells", spellRoutes);
 // This starts the server
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Server has started");
-    sql = "SELECT * FROM Spells"
+    sql = "SELECT * FROM Spells ORDER BY name ASC"
     runSQL(sql);
 });
