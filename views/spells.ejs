@@ -9,7 +9,29 @@
 <ul>
 <% results.forEach(function(spell){
 %>
-            <li><a href="/spells/<%= spell.id %>"><i class="magic icon"></i> <%= spell.name %></a></li>
+            <li><a href="/spells/<%= spell.spellID %>"><i class="magic icon"></i> <%= spell.name %></a> :: <%= spell.damage %> Damage :: <%= spell.DC %> Cast DC 
+                <% var specialText = ""
+                    switch (spell.specialEffect) {
+                        case 0:
+                            specialText = "None";
+                            break;
+                        case 1:
+                            specialText = "Burn";
+                            break;
+                        case 2:
+                            specialText = "Stun";
+                            break;
+                        case 3:
+                            specialText = "Heal";
+                            break;
+                        case 4:
+                            specialText = "Block";
+                            break;
+                        default:
+                            specialText = "Error: See Admin";
+                    } %>
+                :: Special: <%= specialText %>
+             </li>
 <% }) %>
 </ul>
 <%include partials/footer %>

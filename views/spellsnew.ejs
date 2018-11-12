@@ -1,9 +1,21 @@
 <% include partials/header %>
-
+<h1>Add a Spell</h1>
 <form action="/spells" method="POST">
+    <br>Name of Spell
     <input type="text" name="name" placeholder="Spell Name">
+    <br>Spell  Damage
     <input type="number" name="damage" placeholder="0">
-    <input type="Submit" value="submit">
+    <br>Spell Cast DC
+    <input type="number" name="DC" placeholder="0">
+    <br>Special Effects
+    <select name="specialEffect">
+        <option value=0>None</option>
+        <option value=1>Burn</option>
+        <option value=2>Stun</option>
+        <option value=3>Heal</option>
+        <option value=4>Block</option>
+    </select>
+    <br><input type="submit" value="Submit">
 </form>
 
 <% include partials/footer %>

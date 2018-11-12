@@ -1,0 +1,25 @@
+<% include partials/header %>
+
+<h1><%= results[0].name %> :: Details</h1>
+
+<form action="/spells/spelledit" method="POST">
+    <br>Spell ID Num.
+    <input type="number" name="spellID" readonly value="<%= results[0].spellID %>">
+    <br>Name of Spell
+    <input type="text" name="name" value="<%= results[0].name %>" >
+    <br>Spell  Damage
+    <input type="number" name="damage" value="<%= results[0].damage %>" >
+    <br>Spell Cast DC
+    <input type="number" name="DC" value="<%= results[0].DC %>" >
+    <br>Special Effects
+    <select name="specialEffect">
+        <option <% if(results[0].specialEffect == 0) { %> selected <% } %> value=0>None</option>
+        <option <% if(results[0].specialEffect == 1) { %> selected <% } %> value=1>Burn</option>
+        <option <% if(results[0].specialEffect == 2) { %> selected <% } %> value=2>Stun</option>
+        <option <% if(results[0].specialEffect == 3) { %> selected <% } %> value=3>Heal</option>
+        <option <% if(results[0].specialEffect == 4) { %> selected <% } %> value=4>Block</option>
+    </select>
+    <br><input type="submit" value="Submit">
+</form>
+
+<% include partials/footer %>

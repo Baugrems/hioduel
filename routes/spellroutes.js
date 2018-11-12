@@ -22,15 +22,43 @@ router.get("/", function(req, res){
 });
 
 router.post("/", function(req, res){
-    con.query(('INSERT INTO Spells (name, damage) VALUES ("' + req.body.name + '", ' + req.body.damage + ')'), function (error, results, fields) {
-        if (error)
-            throw error;
-        res.redirect("/spells");
-    });
+    if(req.body.specialEffect != null){
+        con.query(('INSERT INTO Spells (name, damage, DC, specialEffect) VALUES ("' + req.body.name + '", "' + req.body.damage + '", "' + req.body.DC + '", "' + req.body.specialEffect + '")'), function (error, results, fields) {
+            if (error)
+                throw error;
+            res.redirect("/spells");
+        });
+    }
+    else{
+        con.query(('INSERT INTO Spells (name, damage, DC) VALUES ("' + req.body.name + '", "' + req.body.damage + '", "' + req.body.DC + '")'), function (error, results, fields) {
+            if (error)
+                throw error;
+            res.redirect("/spells");
+        });
+    }
 });
 
 router.get("/new", function(req, res){
     res.render("spellsnew");
+});
+
+router.post("/spelledit", function(req, res){
+    con.query(('UPDATE Spells SET name="' + req.body.name + '", damage=' + req.body.damage + ', DC=' + req.body.DC + ', specialEffect=' + req.body.specialEffect + ' WHERE spellID=' + req.body.spellID + ';'), function (error, results, fields){
+        if (error){
+            throw error;
+        }
+        res.redirect("/spells");
+    });
+});
+
+router.get("/:spellID", function(req, res){
+    con.query('SELECT * FROM Spells WHERE spellID="' + req.params.spellID + '"', function (error, results, fields){
+        if (error){
+            throw error;
+        }
+        console.log(results);
+        res.render("spelledit", {results: results});
+    });
 });
 
 router.get("*", function(req, res){
