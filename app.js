@@ -9,6 +9,7 @@ var app = express();
 // Set main routes
 var indexRoutes = require("./routes/index");
 var spellRoutes = require("./routes/spellroutes");
+var duelistRoutes = require("./routes/duelistroutes");
 
 // Set up modules to be used
 app.use(bodyParser.urlencoded({extended: true}));
@@ -29,6 +30,9 @@ var con = mysql.createConnection({
 // Spells Table for reference
 //var sql = "CREATE TABLE Spells (name VARCHAR(255), damage int(11), DC int(11), specialEffect int(11), spellID int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (spellID));"
 
+// Duelist Table for reference
+//sql = "CREATE TABLE Duelists (name VARCHAR(255), stamina int(11), evasion int(11), strength int(11), wisdom int(11), arcane int(11), accuracy int(11), duelistID int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (duelistID));"
+
 // Runs SQL passed to it
 function runSQL(sql){
     con.query(sql, function (error, results, fields) {
@@ -39,6 +43,8 @@ function runSQL(sql){
             results.forEach(result => {
                 console.log(result);
             });
+        } else {
+            console.log(results);
         }
     });
 }
@@ -46,6 +52,7 @@ function runSQL(sql){
 // Gets routes
 app.use(indexRoutes);
 app.use("/spells", spellRoutes);
+app.use("/duelists", duelistRoutes);
 
 // This starts the server
 app.listen(process.env.PORT, process.env.IP, function(){

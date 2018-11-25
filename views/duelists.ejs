@@ -1,0 +1,14 @@
+<% include partials/header %>
+
+<h1>Duelists</h1>
+<a href="duelists/new"><button class="ui inverted violet button">
+    <i class="icon user"></i>
+    Add Duelist
+  </button></a>
+<ul>
+    <% results.forEach(function(duelist){
+    %>
+                <li><a href="/duelists/<%= duelist.duelistID %>"><i class="user icon"></i> <%= duelist.name %></a></li>
+    <% }) %>
+    </ul>
+<% include partials/footer %>

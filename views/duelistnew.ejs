@@ -1,0 +1,21 @@
+<% include partials/header %>
+
+<h1>Add a Duelist</h1>
+<form action="/duelists" method="POST">
+    <br>Name of Spell
+    <input type="text" name="name" required placeholder="Duelist Name">
+    <br>Stamina
+    <input type="number" name="stamina" required placeholder="0">
+    <br>Evasion
+    <input type="number" name="evasion" required placeholder="0">
+    <br>Strength
+    <input type="number" name="strength" required placeholder="0">
+    <br>Wisdom
+    <input type="number" name="wisdom" required placeholder="0">
+    <br>Arcane
+    <input type="number" name="arcane" required placeholder="0">
+    <br>Accuracy
+    <input type="number" name="accuracy" required placeholder="0">
+    <br><input type="submit" value="Submit">
+</form>
+<% include partials/footer %>

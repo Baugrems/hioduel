@@ -71,7 +71,6 @@ router.get("/:spellID", function(req, res){
         if (error){
             throw error;
         }
-        console.log(results);
         res.render("spelledit", {results: results});
     });
 });
