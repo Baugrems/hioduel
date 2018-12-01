@@ -3,7 +3,6 @@ var bodyParser = require("body-parser");
 var flash = require("connect-flash");
 var mysql = require("mysql");
 var methodOverride = require("method-override");
-var tools = require('./tools');
 
 var app = express();
 
@@ -34,6 +33,21 @@ var con = mysql.createConnection({
 // Duelist Table for reference
 //sql = "CREATE TABLE Duelists (name VARCHAR(255), stamina int(11), evasion int(11), strength int(11), wisdom int(11), arcane int(11), accuracy int(11), duelistID int(11) NOT NULL AUTO_INCREMENT, PRIMARY KEY (duelistID));"
 
+function runSQL (sql) {
+  con.query(sql, function (error, results, fields) {
+      if (error){
+          throw error;
+      }
+      if (results[1]){
+          results.forEach(result => {
+              console.log(result);
+          });
+      } else {
+          console.log(results);
+      }
+  });
+}
+
 // Gets routes
 app.use(indexRoutes);
 app.use("/spells", spellRoutes);
@@ -43,5 +57,5 @@ app.use("/duelists", duelistRoutes);
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Server has started");
     sql = "SELECT * FROM Spells ORDER BY name ASC"
-    tools.runSQL(sql);
+    runSQL(sql);
 });

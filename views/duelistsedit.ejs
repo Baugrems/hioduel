@@ -1,11 +1,11 @@
 <% include partials/header %>
 
 <h1>Duelist info: <%= results[0].name %></h1>
-<form action="duelists/edit" method="POST">
+<form action="/duelists/edit" method="POST">
     Duelist ID (Read-Only)
-    <input type="number" name="duelistsID" readonly value="<%= results[0].duelistID %>">
+    <input type="number" name="duelistID" readonly value="<%= results[0].duelistID %>">
     <br>Duelist name
-    <input type="text" required value="<%= results[0].name %>">
+    <input type="text" required name="name" value="<%= results[0].name %>">
     <br>Stamina
     <input type="number" name="stamina" required value="<%= results[0].stamina %>">
     <br>Evasion

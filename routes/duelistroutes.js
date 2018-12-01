@@ -2,7 +2,6 @@ var express = require("express");
 var router = express.Router();
 var mysql = require("mysql");
 var bodyParser = require("body-parser");
-var tools = require('./tools');
 
 router.use(bodyParser.urlencoded({extended: true}));
 
@@ -51,9 +50,25 @@ router.get("/:duelistID", function(req, res){
 
 //edit route for duelists being edited
 router.post("/edit", function(req, res){
-  var sql='UPDATE Duelists SET name="' + req.body.name + '", stamina=' + req.body.stamina + ', evasion=' + req.body.evasion + ', strength=' + req.body.strength + ', wisdom=' + req.body.wisdom + ' WHERE duelistID=' + req.body.spellID + ';';
-  tools.runSQL(sql);
+  var sql='UPDATE Duelists SET name="' + req.body.name + '", stamina=' + req.body.stamina + ', evasion=' + req.body.evasion + ', strength=' + req.body.strength + ', wisdom=' + req.body.wisdom + ' WHERE duelistID=' + req.body.duelistID + ';';
+  runSQL(sql);
+  res.redirect("/duelists");
 });
+
+function runSQL (sql) {
+  con.query(sql, function (error, results, fields) {
+      if (error){
+          throw error;
+      }
+      if (results[1]){
+          results.forEach(result => {
+              console.log(result);
+          });
+      } else {
+          console.log(results);
+      }
+  });
+}
 
 // Sends route info to app, do not delete
 module.exports = router;
