@@ -1,5 +1,24 @@
 <% include partials/header %>
 
 <h1>Duelist info: <%= results[0].name %></h1>
+<form action="duelists/edit" method="POST">
+    Duelist ID (Read-Only)
+    <input type="number" name="duelistsID" readonly value="<%= results[0].duelistID %>">
+    <br>Duelist name
+    <input type="text" required value="<%= results[0].name %>">
+    <br>Stamina
+    <input type="number" name="stamina" required value="<%= results[0].stamina %>">
+    <br>Evasion
+    <input type="number" name="evasion" required value="<%= results[0].evasion %>">
+    <br>Strength
+    <input type="number" name="strength" required value="<%= results[0].strength %>">
+    <br>Wisdom
+    <input type="number" name="wisdom" required value="<%= results[0].wisdom %>">
+    <br>Arcane Power
+    <input type="number" name="arcane" required value="<%= results[0].arcane %>">
+    <br>Accuracy
+    <input type="number" name="accuracy" required value="<%= results[0].accuracy %>">
+    <input type="submit" value="Submit Edit">
+</form>
 
 <% include partials/footer %>

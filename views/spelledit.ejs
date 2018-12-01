@@ -6,11 +6,11 @@
     <br>Spell ID Num.
     <input type="number" name="spellID" readonly value="<%= results[0].spellID %>">
     <br>Name of Spell
-    <input type="text" name="name" value="<%= results[0].name %>" >
+    <input type="text" name="name" required value="<%= results[0].name %>" >
     <br>Spell  Damage
-    <input type="number" name="damage" value="<%= results[0].damage %>" >
+    <input type="number" name="damage" required value="<%= results[0].damage %>" >
     <br>Spell Cast DC
-    <input type="number" name="DC" value="<%= results[0].DC %>" >
+    <input type="number" name="DC" required value="<%= results[0].DC %>" >
     <br>Special Effects
     <select name="specialEffect">
         <option <% if(results[0].specialEffect == 0) { %> selected <% } %> value=0>None</option>

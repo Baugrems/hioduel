@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var mysql = require("mysql");
 var bodyParser = require("body-parser");
+var tools = require('./tools');
 
 router.use(bodyParser.urlencoded({extended: true}));
 
@@ -46,6 +47,12 @@ router.get("/:duelistID", function(req, res){
       }
       res.render("duelistsedit", {results: results});
   });
+});
+
+//edit route for duelists being edited
+router.post("/edit", function(req, res){
+  var sql='UPDATE Duelists SET name="' + req.body.name + '", stamina=' + req.body.stamina + ', evasion=' + req.body.evasion + ', strength=' + req.body.strength + ', wisdom=' + req.body.wisdom + ' WHERE duelistID=' + req.body.spellID + ';';
+  tools.runSQL(sql);
 });
 
 // Sends route info to app, do not delete
