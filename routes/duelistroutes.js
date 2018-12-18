@@ -13,9 +13,6 @@ var con = mysql.createConnection({
     //insecureAuth : true
   });
 
-
-
-
 // Duelists Home page render for /duelists
 router.get("/", function(req, res){
   con.query('SELECT * FROM Duelists ORDER BY name ASC', function (error, results, fields) {
@@ -54,6 +51,24 @@ router.post("/edit", function(req, res){
   runSQL(sql);
   res.redirect("/duelists");
 });
+
+router.get("/delete/:duelistID", function(req, res){
+    con.query('SELECT * FROM Duelists WHERE duelistID="' + req.params.duelistID + '"', function (error, results, fields){
+        if (error){
+            throw error;
+        }
+        res.render("duelistsdelete", {results: results});
+    });
+  });
+
+  router.post("/delete/:duelistID", function(req, res){
+    con.query('DELETE FROM Duelists WHERE duelistID="' + req.params.duelistID + '"', function (error, results, fields){
+      if (error){
+        throw error;
+      }
+      res.redirect("/duelists");
+    });
+  });
 
 function runSQL (sql) {
   con.query(sql, function (error, results, fields) {

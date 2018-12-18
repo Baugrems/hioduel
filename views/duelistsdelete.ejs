@@ -1,0 +1,8 @@
+<% include partials/header %>
+
+<h1>Delete <%= results[0].name %>?</h1>
+<form action="/duelists/delete/<%= results[0].duelistID %>" method="POST">
+    <input type="submit" value="Yes">
+</form>
+<a href="/duelists"><button>Cancel</button></a>
+<% include partials/footer %>

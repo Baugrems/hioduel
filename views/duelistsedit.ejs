@@ -20,5 +20,6 @@
     <input type="number" name="accuracy" required value="<%= results[0].accuracy %>">
     <input type="submit" value="Submit Edit">
 </form>
+<a href="/duelists/delete/<%= results[0].duelistID %>"><button class="ui red button">Delete Duelist</button></a>
 
 <% include partials/footer %>
